@@ -115,7 +115,6 @@ class UI : VerticalLayout() {
                 addColumn(Bestellung::menge).setHeader("Menge").flexGrow = 0
                 isColumnReorderingAllowed = true
             }
-            grid.setItems(Vitesca.getBestellungenForUser(User("Wulff", "qweqweqwe")).sorted())
         }
 
     }
