@@ -1,0 +1,68 @@
+buildscript {
+    ext.kotlin_version = '1.2.61'
+    ext.karibudsl_version = '0.4.8'
+    ext.vaadin_version = '11.0.0'
+    ext.serialization_version = '0.6.1'
+
+    repositories {
+        jcenter()
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+    }
+}
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.61"
+    id "org.gretty" version "2.1.0"
+    // remove when https://github.com/gradle/gradle/issues/4417 is fixed
+    id "io.spring.dependency-management" version "1.0.4.RELEASE"
+}
+
+apply plugin: 'war'
+apply plugin: 'kotlinx-serialization'
+
+group 'com.doubleu'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()   // required for the new org.gretty:2.1.0
+    maven { url 'https://maven.vaadin.com/vaadin-addons' }
+    maven { url 'https://maven.vaadin.com/vaadin-prereleases' }
+    maven { url "https://dl.bintray.com/mvysny/github" }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+dependencyManagement {
+    imports { mavenBom "com.vaadin:vaadin-bom:$vaadin_version" }
+}
+
+dependencies {
+    // Karibu-DSL dependency, includes Vaadin
+    compile("com.github.vok.karibudsl:karibu-dsl-v10:$karibudsl_version")
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
+    // logging
+    // See src/main/resources/logback.xml file for the logger configuration
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+gretty {
+    contextPath = ''
+}
