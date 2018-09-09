@@ -3,6 +3,7 @@ import com.vaadin.flow.component.Component
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Image
+import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -23,10 +24,14 @@ class UI : VerticalLayout() {
     val myTabs = MyTabs()
 
     init {
-        val image = Image("Ditesca.png", "Ditesca-Logo")
+        val image = Image("https://i.imgur.com/0Hx4DBF.png", "Ditesca-Logo")
         image.flexGrow = 0.0
-        add(HorizontalLayout(myTabs, image))
-        myTabs.flexGrow = 1.0
+        val fillx = Label()
+        fillx.flexGrow = 1.0
+        val hl = HorizontalLayout(myTabs, fillx, image)
+        hl.flexGrow = 1.0
+        add(hl)
+        myTabs.flexGrow = 0.0
         setSizeFull()
         val div = Div(allUserLayout, singleUserLayout)
         div.setSizeFull()
