@@ -62,7 +62,7 @@ class UI : VerticalLayout() {
         }
     }
 
-    inner class AllUserTab : MyTab("Alle", allUserLayout)
+    inner class AllUserTab : MyTab("Gesamtübersicht", allUserLayout)
 
     class AllUserLayout : VerticalLayout() {
 
@@ -96,7 +96,7 @@ class UI : VerticalLayout() {
         }
     }
 
-    inner class SingleUserTab : MyTab("Einer", singleUserLayout)
+    inner class SingleUserTab : MyTab("Einzelansicht", singleUserLayout)
 
     inner class SingleUserLayout : VerticalLayout() {
 

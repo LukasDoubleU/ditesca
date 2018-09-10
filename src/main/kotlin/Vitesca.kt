@@ -23,14 +23,14 @@ object Vitesca {
 
         // Parse zunächst die Ungeraden Wochentage (Mo, Mi, Fr)
         val odd = doc.getElementsByClass("odd")
-        odd.subList(0, 7).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Montag", index)) }
-        odd.subList(8, 15).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Mittwoch", index)) }
-        odd.subList(16, 23).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Freitag", index)) }
+        odd.subList(0, 8).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Montag", index)) }
+        odd.subList(8, 16).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Mittwoch", index)) }
+        odd.subList(16, 24).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Freitag", index)) }
 
         // Parse jetzt die Gerade Wochentage (Di, Do)
         val even = doc.getElementsByClass("even")
-        even.subList(0, 7).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Dienstag", index)) }
-        even.subList(8, 15).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Donnerstag", index)) }
+        even.subList(0, 8).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Dienstag", index)) }
+        even.subList(8, 16).forEachIndexed { index, element -> bestellungen.plusAssign(toBestellung(user, element, "Donnerstag", index)) }
 
         return bestellungen.filter { it.menge != 0 }.toList().sorted()
     }
