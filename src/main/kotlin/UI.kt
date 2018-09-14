@@ -69,6 +69,8 @@ class UI : VerticalLayout() {
         lateinit var grid: Grid<BenutzerBestellung>
 
         init {
+            isSpacing = true
+            setSizeFull()
             isVisible = true
             horizontalLayout {
                 val name = textField("Name")
@@ -91,6 +93,7 @@ class UI : VerticalLayout() {
                 addColumn(BenutzerBestellung::mi).setHeader("Mi")
                 addColumn(BenutzerBestellung::don).setHeader("Do")
                 addColumn(BenutzerBestellung::fr).setHeader("Fr")
+                setSizeFull()
             }
             grid.setItems(Vitesca.getBenutzerBestellungen())
         }
@@ -103,6 +106,8 @@ class UI : VerticalLayout() {
         lateinit var grid: Grid<Bestellung>
 
         init {
+            isSpacing = true
+            setSizeFull()
             isVisible = false
             horizontalLayout {
                 val name = textField("Name")
@@ -119,6 +124,7 @@ class UI : VerticalLayout() {
                 addColumn(Bestellung::text).setHeader("Text")
                 addColumn(Bestellung::menge).setHeader("Menge").flexGrow = 0
                 isColumnReorderingAllowed = true
+                setSizeFull()
             }
         }
 

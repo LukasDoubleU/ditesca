@@ -2,6 +2,7 @@ import com.vaadin.flow.component.notification.Notification
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.net.URL
+import java.net.URLEncoder
 
 object Vitesca {
 
@@ -11,9 +12,10 @@ object Vitesca {
 
         // Baue die Verbindung auf und ermittle den Quelltext
         val doc = try {
-            Jsoup.connect(URL("${baseURL}user=${user.login}&password=${user.password}").toString()).get()
-
+            val url = URL("${baseURL}user=${URLEncoder.encode(user.login, "UTF-8")}&password=${URLEncoder.encode(user.password, "UTF-8")}").toString()
+            Jsoup.connect(url).get()
         } catch (e: Exception) {
+            e.printStackTrace()
             Notification.show("Fehler beim Verbindungsaufbau mit Benutzer '$user'. Der Benutzer wird entfernt.")
             Users.remove(user)
             return emptyList()
